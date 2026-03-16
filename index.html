@@ -1993,6 +1993,7 @@
         const waLinkElement = document.getElementById('wa-submit-link');
         const nameInput = document.getElementById('blessing-name');
         const msgInput = document.getElementById('blessing-msg');
+        const waMobileDirect = document.getElementById('wa-mobile-direct');
 
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
         const PHONE = '918209094155';
@@ -2021,6 +2022,16 @@
 
         nameInput.addEventListener('input', updateWhatsAppLink);
         msgInput.addEventListener('input', updateWhatsAppLink);
+
+        // Mobile-only direct WhatsApp button (no typing on site, typing happens inside WhatsApp).
+        if (waMobileDirect && isMobile) {
+            waMobileDirect.addEventListener('click', function (e) {
+                // Ensure navigation happens in the same tab; some mobile browsers
+                // are strict about opening external apps only from direct user gestures.
+                e.preventDefault();
+                window.location.href = waMobileDirect.href;
+            });
+        }
 
         waLinkElement.addEventListener('click', function (e) {
             const name = nameInput.value.trim();
