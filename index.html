@@ -1776,7 +1776,7 @@
                 maxlength="200"></textarea>
             <a href="#" id="wa-submit-link" target="_blank" style="text-decoration:none; text-align:center; padding: 13px; background: var(--velvet); color: white; border: none; border-radius: 30px; font-family: 'Cinzel'; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s, transform 0.2s; display: inline-block;">Send Blessings 💛</a>
         </div>
-        <div class="mobile-wa-only">
+        <div class="mobile-wa-only" id="wa-mobile-direct-wrapper">
             <a id="wa-mobile-direct" href="https://wa.me/918209094155">
                 Send Your Blessings on WhatsApp 💛
             </a>
@@ -1993,6 +1993,7 @@
         const waLinkElement = document.getElementById('wa-submit-link');
         const nameInput = document.getElementById('blessing-name');
         const msgInput = document.getElementById('blessing-msg');
+        const waMobileWrapper = document.getElementById('wa-mobile-direct-wrapper');
 
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
         const PHONE = '918209094155';
@@ -2021,6 +2022,17 @@
 
         nameInput.addEventListener('input', updateWhatsAppLink);
         msgInput.addEventListener('input', updateWhatsAppLink);
+
+        // On mobile, make the whole mobile button area tappable to open WhatsApp.
+        if (waMobileWrapper && isMobile) {
+            const openMobileWa = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.location.href = 'https://wa.me/918209094155';
+            };
+            waMobileWrapper.addEventListener('click', openMobileWa);
+            waMobileWrapper.addEventListener('touchend', openMobileWa);
+        }
 
         waLinkElement.addEventListener('click', function (e) {
             const name = nameInput.value.trim();
