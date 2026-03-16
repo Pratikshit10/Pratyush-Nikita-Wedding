@@ -854,6 +854,43 @@
             border-color: var(--gold);
         }
 
+        /* Mobile-only: hide the inline form and show a simple WhatsApp button instead */
+        .mobile-wa-only {
+            display: none;
+            max-width: 480px;
+            margin: 0 auto 40px;
+        }
+
+        .mobile-wa-only a {
+            text-decoration: none;
+            text-align: center;
+            padding: 13px;
+            background: var(--velvet);
+            color: white;
+            border-radius: 30px;
+            font-family: 'Cinzel';
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+
+        .mobile-wa-only small {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .blessing-form {
+                display: none;
+            }
+            .mobile-wa-only {
+                display: block;
+                text-align: center;
+            }
+        }
+
         .blessing-form button {
             padding: 13px;
             background: var(--velvet);
@@ -1738,6 +1775,12 @@
             <textarea id="blessing-msg" rows="3" placeholder="Write your heartfelt wishes..."
                 maxlength="200"></textarea>
             <a href="#" id="wa-submit-link" target="_blank" style="text-decoration:none; text-align:center; padding: 13px; background: var(--velvet); color: white; border: none; border-radius: 30px; font-family: 'Cinzel'; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s, transform 0.2s; display: inline-block;">Send Blessings 💛</a>
+        </div>
+        <div class="mobile-wa-only">
+            <a id="wa-mobile-direct" href="https://api.whatsapp.com/send?phone=918209094155" target="_blank">
+                Send Your Blessings on WhatsApp 💛
+            </a>
+            <small>You’ll be taken to WhatsApp to type your wishes there.</small>
         </div>
         <div class="blessings-wall" id="blessings-wall"></div>
     </section>
